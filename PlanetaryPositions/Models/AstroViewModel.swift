@@ -6,20 +6,7 @@ class AstroViewModel: ObservableObject {
     @Published var isGeocentric: Bool = true
     @Published var latitude: Double = 19.4326   // default CDMX
     @Published var longitude: Double = -99.1332
-    @Published var planets: [PlanetPosition] = []
-    @Published var angles: ChartAngles = ChartAngles(ascendant: 0, descendant: 180, midheaven: 90, imumCoeli: 270, northNode: 0, southNode: 180)
-    @Published var houseCusps: [Double] = Array(repeating: 0, count: 12)
-    @Published var aspects: [AstronomicalEngine.Aspect] = []
-    @Published var isLoading: Bool = false
-    
-    init() {
-        compute()
-    }
-    
-    func compute() {
-        isLoading = true
-        DispatchQueue.global(qos: .userInitiated).async {
-            let result = AstronomicalEngine.computePositions(
+    @ AstronomicalEngine.computePositions(
                 date: self.selectedDate,
                 isGeocentric: self.isGeocentric,
                 latitude: self.latitude,
